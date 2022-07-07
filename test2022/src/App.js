@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Temp from "./components/Temp";
+import Footer from "./components/Footer";
+import Modal from "./components/Modal"
 
 export default function Home() {
 
@@ -23,7 +25,7 @@ export default function Home() {
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
 
-  return (
+  return (<>
     <div>
       <div className="text-center mt-10">
         <h1 className="text-2xl">Derniers relevés de température des cours d&apos;eau du département de la Gironde</h1>
@@ -43,9 +45,14 @@ export default function Home() {
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               <Temp code_station={station.code_station} />
             </p>
+            <div className="flex justify-center">
+              <Modal libelle_station={station.libelle_station} code_station={station.code_station} />
+            </div>
           </div>
         ))}
       </div>
+      <Footer/>
     </div>
+    </>
   );
 }
